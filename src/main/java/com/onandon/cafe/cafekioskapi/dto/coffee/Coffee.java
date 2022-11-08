@@ -1,4 +1,4 @@
-package com.onandon.cafe.cafekioskapi.dto;
+package com.onandon.cafe.cafekioskapi.dto.coffee;
 
 import lombok.Data;
 
