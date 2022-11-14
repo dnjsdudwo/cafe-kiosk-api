@@ -1,21 +1,28 @@
 package com.onandon.cafe.cafekioskapi.controller;
 
-import com.onandon.cafe.cafekioskapi.dto.Coffee;
-import com.onandon.cafe.cafekioskapi.service.CoffeeService;
+import com.onandon.cafe.cafekioskapi.dto.coffee.Coffee;
+import com.onandon.cafe.cafekioskapi.dto.item.Items;
+import com.onandon.cafe.cafekioskapi.service.coffee.CoffeeService;
+import com.onandon.cafe.cafekioskapi.utils.OrderUtils;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @AllArgsConstructor
 public class BeverageController {
 
-    @Autowired
-    private final CoffeeService coffeeService;
+    private final CoffeeService coffeeServiceImpl;
 
     @PostMapping("/coffee")
-    public String makeCoffee(Coffee coffee) {
-        return coffeeService.makeCoffee(coffee);
+    public String makeCoffee(Coffee coffee) throws Exception {
+        return coffeeServiceImpl.make(coffee);
+    }
+
+    @PostMapping("/order")
+    public Map<String,Object> postOrder(@RequestBody Items data) {
+        return OrderUtils.getOrder(data);
     }
 }

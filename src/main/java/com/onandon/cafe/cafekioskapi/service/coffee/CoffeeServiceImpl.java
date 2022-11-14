@@ -7,10 +7,11 @@ import org.springframework.stereotype.Service;
 @Log4j2
 @Service
 public class CoffeeServiceImpl implements CoffeeService{
-    public void make(Coffee coffee) {
+    @Override
+    public String make(Coffee coffee) {
         grindBean(coffee.getBeans());
 
-        choiceHotAndIce(coffee.isIce());
+        return null;
     }
 
     @Override
@@ -22,11 +23,6 @@ public class CoffeeServiceImpl implements CoffeeService{
             throw new RuntimeException(e);
         }
         log.info(beanName + "원두 갈기 끝");
-    }
-
-    @Override
-    public void choiceHotAndIce(boolean isIce) {
-        log.info(isIce + "를 선택하셨습니다.");
     }
 
 }
