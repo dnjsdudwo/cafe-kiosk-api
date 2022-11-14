@@ -9,4 +9,8 @@ public abstract class OrderItem {
     int price;
     String tumbler;
     Integer count;
+    Boolean isMilk;
+    Boolean isIce;
+    String description;
+    String type;
 }
