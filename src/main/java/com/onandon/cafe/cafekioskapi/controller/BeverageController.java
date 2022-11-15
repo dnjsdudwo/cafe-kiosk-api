@@ -38,12 +38,19 @@ public class BeverageController {
         itemServiceImpl.addDrink(drink);
     }
 
-    @GetMapping("/find/coffee")
-    public List<Coffee> getCoffee(){
-        return itemServiceImpl.findCoffee();
+//    @GetMapping("/find/coffee")
+//    public List<Coffee> getCoffee(){
+//        return itemServiceImpl.findCoffee();
+//    }
+//    @GetMapping("/find/drink")
+//    public List<Drink> getDrink(){
+//        return itemServiceImpl.findDrink();
+//    }
+    @GetMapping("/find/all")
+    public Map<String, Object> getAllBeverage(){
+        return itemServiceImpl.findAll();
     }
-    @GetMapping("/find/drink")
-    public List<Drink> getDrink(){
-        return itemServiceImpl.findDrink();
-    }
+
+
+
 }
