@@ -3,6 +3,8 @@ package com.onandon.cafe.cafekioskapi.service.coffee;
 import com.onandon.cafe.cafekioskapi.dto.coffee.Coffee;
 import lombok.extern.log4j.Log4j2;
 
+import java.util.Map;
+
 @Log4j2
 public class EspressoImpl implements CoffeeService{
     @Override
@@ -24,9 +26,12 @@ public class EspressoImpl implements CoffeeService{
     }
 
     @Override
-    public void make(Coffee coffee) throws Exception{
-        grindBean(coffee.getBeans());
+    public int make(Map<String,Object> param) throws Exception{
+        grindBean((String) param.get("bean"));
 
-        choiceHotAndIce(coffee.isIce());
+        choiceHotAndIce((boolean) param.get("isIce"));
+
+        return 1;
     }
+
 }
