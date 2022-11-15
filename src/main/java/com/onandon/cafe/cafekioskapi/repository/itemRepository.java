@@ -2,7 +2,6 @@ package com.onandon.cafe.cafekioskapi.repository;
 
 import com.onandon.cafe.cafekioskapi.dto.coffee.Coffee;
 import com.onandon.cafe.cafekioskapi.dto.drink.Drink;
-import com.onandon.cafe.cafekioskapi.dto.item.Items;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -15,8 +14,8 @@ import java.util.Map;
 @AllArgsConstructor
 public class itemRepository{
 
-    private List<Coffee> coffees;
-    private List<Drink> drinks;
+    private final List<Coffee> coffees;
+    private final List<Drink> drinks;
 
 
     public void CoffeeSave(Coffee coffee){
