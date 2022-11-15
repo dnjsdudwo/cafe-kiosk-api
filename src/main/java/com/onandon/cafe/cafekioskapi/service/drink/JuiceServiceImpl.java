@@ -13,13 +13,17 @@ import java.util.Map;
 public class JuiceServiceImpl implements DrinkService {
     @Override
     public int makeDrink(Map<String, Object> param) throws Exception {
-        Juice juice = new Juice((String) param.get("name")
-                ,(Integer) param.get("price")
-                ,(boolean)param.get("isIce")
-                ,(String) param.get("base"));
+        List<Map<String, Object>> orderList = (List<Map<String, Object>>) param.get("orderList");
 
-        shakeBase(juice.getBase());
-        isIce(juice.isIce());
+        for( Map<String, Object> orderInfo : orderList ) {
+            Juice juice = new Juice((String)orderInfo.get("name")
+                    ,(Integer)orderInfo.get("price")
+                    ,(boolean)orderInfo.get("isIce")
+                    ,(String)orderInfo.get("base"));
+
+            drinkUtil.shakeBase(juice.getBase());
+            drinkUtil.isIce(juice.getName(),juice.isIce());
+        }
 
         return 1;
     }
