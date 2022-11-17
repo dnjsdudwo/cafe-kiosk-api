@@ -5,7 +5,10 @@ import lombok.Data;
 @Data
 public class Coffee {
     private String name;
-    private String beans;
     private int price;
+    private String menuInfo;
+
+
+    private String beans;
     private boolean isIce;
 }
