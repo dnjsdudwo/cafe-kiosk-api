@@ -3,41 +3,38 @@ package com.onandon.cafe.cafekioskapi.repository;
 import com.onandon.cafe.cafekioskapi.dto.coffee.Coffee;
 import com.onandon.cafe.cafekioskapi.dto.drink.Drink;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 @Repository
 @AllArgsConstructor
+@Data
 public class itemRepository{
+
 
     private final List<Coffee> coffees;
     private final List<Drink> drinks;
 
 
-    public void CoffeeSave(Coffee coffee){
+    public List<Coffee> CoffeeSave(Coffee coffee){
         coffees.add(coffee);
-    }
-
-    public void DrinkSave(Drink drink){
-        drinks.add(drink);
-    }
-
-    public List<Coffee> findAllCoffee(){
         return coffees;
     }
 
-    public List<Drink> findAllDrink(){
+    public List<Drink> DrinkSave(Drink drink){
+        drinks.add(drink);
         return drinks;
     }
 
-    public Map<String,Object> findAll() {
-        Map<String,Object> m = new HashMap<>();
-        m.put("coffees",coffees);
-        m.put("drinks",drinks);
-        return m;
+    public List<Coffee> getCoffee() {
+        return coffees;
     }
+
+    public List<Drink> getDrink() {
+        return drinks;
+    }
+
 }

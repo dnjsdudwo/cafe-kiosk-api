@@ -6,11 +6,12 @@ import lombok.Data;
 @Data
 public abstract class OrderItem {
     String name;
-    int price;
+    Integer price;
     String tumbler;
     Integer count;
     Boolean isMilk;
     Boolean isIce;
     String description;
     String type;
+    String img_url;
 }

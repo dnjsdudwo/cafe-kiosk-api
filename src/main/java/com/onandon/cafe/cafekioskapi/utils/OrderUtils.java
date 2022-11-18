@@ -19,11 +19,9 @@ public final class OrderUtils {
 
         for(Coffee coffee: item.getCoffees()){
             for(int i=0; i<item.getCoffees().get(coffeeIndex).getCount(); i++){
-                coffee.setName(item.getCoffees().get(coffeeIndex).getName());
                 coffee.setShot(item.getCoffees().get(coffeeIndex).getShot());
                 coffee.setMilk(item.getCoffees().get(coffeeIndex).getMilk());
                 coffee.setIce(item.getCoffees().get(coffeeIndex).getIce());
-                coffee.setTumbler(item.getCoffees().get(coffeeIndex).getTumbler());
                 coffees.add(coffee);
             }
             coffeeIndex ++;
@@ -31,7 +29,6 @@ public final class OrderUtils {
 
         for(Drink drink: item.getDrinks()){
             for(int i=0; i<item.getDrinks().get(drinkIndex).getCount(); i++){
-                drink.setName(item.getDrinks().get(drinkIndex).getName());
                 drink.setMilk(item.getDrinks().get(drinkIndex).getMilk());
                 drink.setIce(item.getDrinks().get(drinkIndex).getIce());
                 drink.setTumbler(item.getDrinks().get(drinkIndex).getTumbler());

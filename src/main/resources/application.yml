@@ -4,7 +4,12 @@ spring:
     driver-class-name: org.h2.Driver
     username: sa
     password: 1111
-
+  servlet:
+    multipart:
+    file-size-threshold: 1MB
+    location: D://images/
+    max-file-size: 100MB
+    max-request-size: 100MB
 
 server:
   port: 7070
