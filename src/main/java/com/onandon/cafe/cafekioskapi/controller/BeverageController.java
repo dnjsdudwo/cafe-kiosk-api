@@ -38,11 +38,15 @@ public class BeverageController {
             coffee.setPrice(value.getPrice());
             coffee.setMenuInfo(value.getMenuInfo());
             coffee.setCount(value.getCount());
+            coffee.setIsIce(value.getIsIce());
+            coffee.setSize(value.getSize());
 
-            log.info(coffee.getName());
-            log.info("" + coffee.getPrice());
-            log.info(coffee.getMenuInfo());
-            log.info(Integer.toString(coffee.getCount()));
+            log.info("name = {}", coffee.getName());
+            log.info("price = {}", coffee.getPrice());
+            log.info("menuInfo = {}", coffee.getMenuInfo());
+            log.info("count = {}", coffee.getCount());
+            log.info("isIce = {}", coffee.getIsIce());
+            log.info("size = {}", coffee.getSize());
         }
 
 

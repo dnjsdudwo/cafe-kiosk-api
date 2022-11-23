@@ -10,7 +10,7 @@ public class CoffeeServiceImpl implements CoffeeService{
     public void make(Coffee coffee) {
 //        grindBean(coffee.getBeans());
 
-        choiceHotAndIce(coffee.isIce());
+//        choiceHotAndIce(coffee.isIce());
     }
 
     @Override

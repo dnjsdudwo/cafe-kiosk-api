@@ -12,8 +12,8 @@ public class Coffee {
     private int price;
     private String menuInfo;
     private int count;
+    private String isIce;
+    private String size;
 
 //    private String beans;
-    private boolean isIce;
-    private String size;
 }
