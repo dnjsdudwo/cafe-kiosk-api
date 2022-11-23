@@ -25,7 +25,7 @@ public class EspressoImpl implements CoffeeService{
 
     @Override
     public void make(Coffee coffee) throws Exception{
-        grindBean(coffee.getBeans());
+//        grindBean(coffee.getBeans());
 
         choiceHotAndIce(coffee.isIce());
     }

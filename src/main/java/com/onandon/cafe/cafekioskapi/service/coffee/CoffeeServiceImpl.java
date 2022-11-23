@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CoffeeServiceImpl implements CoffeeService{
     public void make(Coffee coffee) {
-        grindBean(coffee.getBeans());
+//        grindBean(coffee.getBeans());
 
         choiceHotAndIce(coffee.isIce());
     }

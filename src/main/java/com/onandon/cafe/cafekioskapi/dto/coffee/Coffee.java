@@ -13,6 +13,7 @@ public class Coffee {
     private String menuInfo;
     private int count;
 
-    private String beans;
+//    private String beans;
     private boolean isIce;
+    private String size;
 }
