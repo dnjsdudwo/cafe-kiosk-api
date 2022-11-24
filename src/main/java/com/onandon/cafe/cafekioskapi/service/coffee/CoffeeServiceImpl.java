@@ -7,10 +7,12 @@ import org.springframework.stereotype.Service;
 @Log4j2
 @Service
 public class CoffeeServiceImpl implements CoffeeService{
+    @Override
     public void make(Coffee coffee) {
 //        grindBean(coffee.getBeans());
 
-//        choiceHotAndIce(coffee.isIce());
+        boolean booleanIsIce = Boolean.parseBoolean(coffee.getIsIce());
+        choiceHotAndIce(booleanIsIce);
     }
 
     @Override
@@ -26,7 +28,23 @@ public class CoffeeServiceImpl implements CoffeeService{
 
     @Override
     public void choiceHotAndIce(boolean isIce) {
-        log.info(isIce + "를 선택하셨습니다.");
+        String hotAndIce = "Hot";
+        if(isIce){
+            hotAndIce = "Ice";
+        }
+
+        if(isIce) {
+           log.info(hotAndIce + "를(을) 선택! 얼음을 넣었습니다.");
+        }else{
+            log.info(hotAndIce + "를(을) 선택! 물 끓이는 중...");
+            try{
+                Thread.sleep(2000);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            log.info("물이 끓고 있어요");
+        }
+
     }
 
 }
