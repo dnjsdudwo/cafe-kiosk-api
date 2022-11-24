@@ -2,11 +2,13 @@ package com.onandon.cafe.cafekioskapi.service.coffee;
 
 import com.onandon.cafe.cafekioskapi.dto.coffee.Coffee;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 @Log4j2
 @Service
-public class CoffeeServiceImpl implements CoffeeService{
+@Primary
+public class NormalCoffeeServiceImpl implements CoffeeService{
     public void make(Coffee coffee) {
         grindBean(coffee.getBeans());
 
@@ -17,7 +19,7 @@ public class CoffeeServiceImpl implements CoffeeService{
     public void grindBean(String beanName) {
         log.info(beanName + "원두 가는 중.........");
         try {
-            Thread.sleep(10000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -26,7 +28,13 @@ public class CoffeeServiceImpl implements CoffeeService{
 
     @Override
     public void choiceHotAndIce(boolean isIce) {
-        log.info(isIce + "를 선택하셨습니다.");
+        String choice = "얼음";
+
+        if (!isIce) {
+            choice = "핫";
+        }
+
+        log.info(choice + "을 선택하셨습니다.");
     }
 
 }
