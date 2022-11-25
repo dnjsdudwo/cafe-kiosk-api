@@ -46,17 +46,17 @@ public class BeverageController {
             log.info(index + "번 커피==================================");
             log.info("menu = {}", coffee.getName() + " " + coffee.getSize());
             coffeeService.make(coffee);
-            
+
             index++;
         }
-        
+
 
         return "coffee success";
     }
 
 
     @PostMapping("/drink")
-    public String drinkOrderList(@RequestBody List<Drink> param) throws Exception {
+    public String drinkOrderList(@RequestBody List<Drink> param) {
         System.out.println("drink 통신: " + param);
 
         Drink drink = new Drink();

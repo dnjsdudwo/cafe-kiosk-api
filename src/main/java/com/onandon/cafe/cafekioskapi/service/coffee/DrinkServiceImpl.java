@@ -20,9 +20,9 @@ public class DrinkServiceImpl implements DrinkService{
         if(isIce) {
             String ice = "Ice";
         }
-        
+
         log.info("얼음 넣고 시럽 넣고 제작");
     }
 
-    
+
 }

@@ -34,7 +34,7 @@ public class CoffeeServiceImpl implements CoffeeService{
         }
 
         if(isIce) {
-           log.info(hotAndIce + "를(을) 선택! 얼음을 넣었습니다.");
+            log.info(hotAndIce + "를(을) 선택! 얼음을 넣었습니다.");
         }else{
             log.info(hotAndIce + "를(을) 선택! 물 끓이는 중...");
             try{
