@@ -13,8 +13,8 @@ import java.util.Map;
 
 @Service
 public interface ItemService {
-    List<Coffee> addCoffee(RequestCoffee coffee) throws Exception;
-    List<Drink> addDrink(RequestDrink drink) throws Exception;
+    List<Coffee> addCoffee(Coffee coffee) throws Exception;
+    List<Drink> addDrink(Drink drink) throws Exception;
 
     List<Coffee> getCoffee();
     List<Drink> getDrink() ;

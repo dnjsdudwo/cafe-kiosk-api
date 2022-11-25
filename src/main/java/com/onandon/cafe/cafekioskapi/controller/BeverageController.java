@@ -3,17 +3,13 @@ package com.onandon.cafe.cafekioskapi.controller;
 import com.onandon.cafe.cafekioskapi.dto.coffee.Coffee;
 import com.onandon.cafe.cafekioskapi.dto.drink.Drink;
 import com.onandon.cafe.cafekioskapi.dto.item.Items;
-import com.onandon.cafe.cafekioskapi.dto.item.RequestCoffee;
-import com.onandon.cafe.cafekioskapi.dto.item.RequestDrink;
 import com.onandon.cafe.cafekioskapi.service.coffee.CoffeeService;
 import com.onandon.cafe.cafekioskapi.service.coffee.ItemService;
 import com.onandon.cafe.cafekioskapi.utils.OrderUtils;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.util.List;
-import java.util.Map;
 
 @RestController
 @AllArgsConstructor
@@ -28,28 +24,25 @@ public class BeverageController {
     }
 
     @PostMapping("/order")
-    public Map<String,Object> postOrder(@RequestBody Items data) {
-        return OrderUtils.getOrder(data);
+    public ResponseEntity postOrder(@RequestBody Items data) {
+        return ResponseEntity.ok(OrderUtils.getOrder(data));
     }
-
     @PostMapping("/add/coffee")
-    public List<Coffee> postAddCoffee(RequestCoffee data)throws Exception{
-        return itemServiceImpl.addCoffee(data);
+    public ResponseEntity postAddCoffee(@RequestBody @Validated Coffee coffee) throws Exception{
+        return ResponseEntity.ok(itemServiceImpl.addCoffee(coffee));
     }
     @PostMapping("/add/drink")
-    public List<Drink> postAddDrink(RequestDrink data)throws Exception{
-        return itemServiceImpl.addDrink(data);
+    public ResponseEntity postAddDrink(@RequestBody Drink drink) throws Exception{
+        return ResponseEntity.ok(itemServiceImpl.addDrink(drink));
     }
-
     @GetMapping("/find/coffee")
-    public List<Coffee> getCoffee(){
-        return itemServiceImpl.getCoffee();
+    public ResponseEntity getCoffee(){
+        return ResponseEntity.ok(itemServiceImpl.getCoffee());
     }
     @GetMapping("/find/drink")
-    public List<Drink> getDrink(){
-        return itemServiceImpl.getDrink();
+    public ResponseEntity getDrink(){
+        return ResponseEntity.ok(itemServiceImpl.getDrink());
     }
-
 
 
 }

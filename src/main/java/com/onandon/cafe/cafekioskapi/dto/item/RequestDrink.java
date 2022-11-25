@@ -8,4 +8,5 @@ import org.springframework.web.multipart.MultipartFile;
 public class RequestDrink {
     private Drink drink;
     private MultipartFile img_file;
+
 }
