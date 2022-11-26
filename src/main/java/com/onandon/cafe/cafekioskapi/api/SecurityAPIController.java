@@ -13,8 +13,8 @@ public class SecurityAPIController {
     @GetMapping("/login")
     public String login(@RequestParam String id,String pw){
         if(id.equals("user") && pw.equals("1234")) {
-            Authentication authentication = new Userauthentication(id,null,null);
-            String token = JwtTokenProvider.generateToken(authentication);
+            Authentication authentication = new Userauthentication(id,pw);
+            String token = JwtTokenProvider.generateToken(authentication).getAccessToken();
             return token;
         }
         return "error";
