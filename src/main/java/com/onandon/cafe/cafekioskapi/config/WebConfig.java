@@ -10,8 +10,7 @@ public class WebConfig implements WebMvcConfigurer {
 
         private String connectPath = "/image/**";
         @Value("${spring.servlet.location}")
-        private String FILE_PATH;
-
+        private  String FILE_PATH;
         @Override
         public void addResourceHandlers(ResourceHandlerRegistry registry) {
                 registry.addResourceHandler(connectPath)

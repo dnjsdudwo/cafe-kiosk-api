@@ -5,8 +5,12 @@ import lombok.Getter;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;
 
+import javax.annotation.PostConstruct;
 import java.io.FileNotFoundException;
 import java.nio.file.NoSuchFileException;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 @Getter
 public enum ErrorCode {
@@ -20,8 +24,10 @@ public enum ErrorCode {
     FILE_NOT_FOUND_ERROR(HttpStatus.BAD_GATEWAY,"FILE_ERROR_01", " 지정된 파일을 찾을 수 없습니다."),
 
     // VALIDATION
-    BIND_ERROR(HttpStatus.BAD_REQUEST,"VA00","");
-
+    BIND_ERROR(HttpStatus.BAD_REQUEST,"VA00",""),
+    // security
+    UNAUTHORIZATION_CODE(HttpStatus.UNAUTHORIZED,"SECRUTY_00"," 허용되지않는 접근입니다.");
+    
     private final HttpStatus status;
     private final String code;
     protected String message;

@@ -12,6 +12,18 @@ spring:
     max-file-size: 100MB
     max-request-size: 100MB
 
+  autoconfigure:
+    exclude:org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration
+
+  security:
+    user:
+      name: user
+      password: 1234
+
+  jwt:
+    secret-key: secretKey
+    expiration-ms: 10000000
+
 server:
   port: 7070
 #  error:
@@ -19,6 +31,7 @@ server:
 #    include-binding-errors: always
 #    include-exception: false
 #    include-stacktrace: always
+
 
 
 
