@@ -12,23 +12,15 @@ import java.util.Map;
 public class CustomException extends RuntimeException {
     private final ErrorCode errorCode;
 
+
     public CustomException(String message, ErrorCode errorCode){
         super(message);
         errorCode.message = message;
         this.errorCode = errorCode;
     }
     public CustomException(ErrorCode errorCode){
-        Map<String,String> originMessage = saveMessage();
-        String message = originMessage.get(errorCode.getCode());
-        errorCode.message = message;
+        super(errorCode.message);
         this.errorCode = errorCode;
     }
-    @PostConstruct
-    private Map<String,String> saveMessage(){
-        Map<String,String> messages = new HashMap<>();
-        for (ErrorCode err : ErrorCode.values()) {
-            messages.put(err.getCode(),err.getMessage());
-        }
-        return messages;
-    }
+
 }

@@ -24,6 +24,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     FilterChain filterChain) throws ServletException, IOException {
         log.info(request.getRequestURI());
 
+        if(request.getRequestURI().contains("login")){
+            filterChain.doFilter(request,response);
+            return;
+        }
         if(!request.getRequestURI().contains("login") && !request.getRequestURI().contains("favicon")){
             log.info("토큰 체크");
         }
@@ -35,7 +39,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 log.info("userId : " + userId);
 
                 Userauthentication authentication = new Userauthentication(userId,null,null); // id를 인증한다
-                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request)); // 기본적으로 제공한 details 세팅
 
                 SecurityContextHolder.getContext()
                         .setAuthentication(authentication); // 세션에서 계속 사용하기 위해 securitycontext에 authentication등록

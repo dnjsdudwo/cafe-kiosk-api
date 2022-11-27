@@ -26,7 +26,8 @@ public enum ErrorCode {
     // VALIDATION
     BIND_ERROR(HttpStatus.BAD_REQUEST,"VA00",""),
     // security
-    UNAUTHORIZATION_CODE(HttpStatus.UNAUTHORIZED,"SECRUTY_00"," 허용되지않는 접근입니다.");
+    UNAUTHORIZATION_CODE(HttpStatus.UNAUTHORIZED,"SECRUTY_00"," 허용되지않는 접근입니다."),
+    UNREGISTRY_MEMBER(HttpStatus.NOT_FOUND,"SECURITY_01"," 아이디/비밀번호를 확인해주세요");
     
     private final HttpStatus status;
     private final String code;
