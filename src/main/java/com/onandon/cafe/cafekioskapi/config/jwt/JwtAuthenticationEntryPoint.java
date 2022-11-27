@@ -1,5 +1,6 @@
 package com.onandon.cafe.cafekioskapi.config.jwt;
 
+import com.onandon.cafe.cafekioskapi.error.CustomException;
 import com.onandon.cafe.cafekioskapi.error.ErrorCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.AuthenticationException;
@@ -21,6 +22,6 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
             AuthenticationException e) throws IOException, ServletException {
 
         log.error("unauthorized error : {}", e.getMessage());
-        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, ErrorCode.UNAUTHORIZATION_CODE.getMessage());
+        throw new CustomException(ErrorCode.UNAUTHORIZATION_CODE);
     }
 }

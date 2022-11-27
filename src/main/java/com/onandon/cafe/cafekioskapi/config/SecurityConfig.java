@@ -3,6 +3,7 @@ package com.onandon.cafe.cafekioskapi.config;
 
 import com.onandon.cafe.cafekioskapi.config.jwt.JwtAuthenticationEntryPoint;
 import com.onandon.cafe.cafekioskapi.config.jwt.JwtAuthenticationFilter;
+import com.onandon.cafe.cafekioskapi.service.coffee.SecurityServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -18,7 +19,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     private final JwtAuthenticationEntryPoint unauthorizedHandler;
-
+    private final SecurityServiceImpl securityServiceImpl;
     @Bean
     protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
        return  http
@@ -34,7 +35,7 @@ public class SecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 시큐리티는 기본적으로 세션을 사용하는데 여기서는 사용하지 않으니 stateless
                 .and()
                 // UsernamePasswordAuthentioationFilter 보다 JwtAuthentioationFilter를 먼저수행
-                .addFilterBefore(new JwtAuthenticationFilter(),
+                .addFilterBefore(new JwtAuthenticationFilter(securityServiceImpl),
                         UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
                 .antMatchers("/login/**").permitAll()
@@ -42,9 +43,7 @@ public class SecurityConfig {
                 .authenticated()
 
                 .and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and().build();
+                .build();
     }
 
 }

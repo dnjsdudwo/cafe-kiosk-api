@@ -22,11 +22,11 @@ import java.util.Date;
 @Component
 public class JwtTokenProvider {
 
-
-    private static final String AUTHORITIES_KEY = "auth";
     private static final String BEARER_TYPE = "Bearer";
-    private static String JWT_SECRET = "c3ByaW5nLWJvb3Qtc2VjdXJpdHktand0LXR1dG9yaWFsLWppd29vbi1zcHJpbmctYm9vdC1zZWN1cml0eS1qd3QtdHV0b3JpYWwK";
-    private static Long JWT_EXPIRATION_MS = 1000000L;
+    private static String JWT_SECRET = "YXNkYXNnaW9qd2VnaW9hamVzZ2lvYXNkZ2phc2Rsa2dqYXdlb2lwZ2phc29pZWdqYXNkbGtnamFzZGxnaXdlamdpbGFzZWdqYWxzaWc=";
+    private static String JWT_REFRESH_SECRET = "YXNkYXNnaW9qd2VnaW9hamVzZ2lvYXNkZ2phc2Rsa2dqYXdlb2lwZ2phc29pZWdqYXNkbGtnamFzZGxnaXdlamdpbGFzZWdqYWxzabc=";
+    private static Long JWT_EXPIRATION_MS = 30000L;
+    private static Long JWT_REFRESH_EXPIRATION_MS = 30000000L;
     private static Key key;
 
 
@@ -37,6 +37,7 @@ public class JwtTokenProvider {
     public static Token generateToken(Authentication authentication){
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + JWT_EXPIRATION_MS);
+        Date reExpiryDate = new Date(now.getTime() + JWT_REFRESH_EXPIRATION_MS);
 
         String accessToken = Jwts.builder()
                 .setSubject((String) authentication.getPrincipal())
@@ -46,7 +47,7 @@ public class JwtTokenProvider {
                 .compact();
 
         String refreshToken = Jwts.builder()
-                .setExpiration(expiryDate)
+                .setExpiration(reExpiryDate)
                 .signWith(key, SignatureAlgorithm.HS512)
                 .compact();
 
@@ -54,7 +55,7 @@ public class JwtTokenProvider {
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
                 .accessTokenExpiresIn(expiryDate.getTime())
-                .grantType(AUTHORITIES_KEY)
+                .grantType(BEARER_TYPE)
                 .build();
 
     }
@@ -85,5 +86,52 @@ public class JwtTokenProvider {
         return false;
     }
 
+    public static Boolean expireToken(String accessToken) {
+        try {
+            // 검증
+            Jws<Claims> claims = Jwts.parserBuilder().setSigningKey(JWT_REFRESH_SECRET).build().parseClaimsJws(accessToken);
+
+            if (claims.getBody().getExpiration().before(new Date())) {
+                return true;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+        return false;
+    }
+
+    public String validateRefreshToken(String refreshToken) {
+        try {
+            // 검증
+            Jws<Claims> claims = Jwts.parserBuilder().setSigningKey(JWT_REFRESH_SECRET).build().parseClaimsJws(refreshToken);
+
+            //refresh 토큰의 만료시간이 지나지 않았을 경우, 새로운 access 토큰을 생성합니다.
+            if (!claims.getBody().getExpiration().before(new Date())) {
+                return recreationAccessToken(claims.getBody().getSubject());
+            }
+        } catch (Exception e) {
+
+            //refresh 토큰이 만료되었을 경우, 로그인이 필요합니다.
+            return null;
+        }
+        return null;
+    }
+
+        public String recreationAccessToken(String id){
+
+            Claims claims = Jwts.claims().setSubject(id); // JWT payload 에 저장되는 정보단위
+            Date now = new Date();
+
+            //Access Token
+            String accessToken = Jwts.builder()
+                    .setIssuedAt(now)
+                    .setExpiration(new Date(now.getTime() + JWT_EXPIRATION_MS))
+                    // set Expire Time
+                    .signWith(key,SignatureAlgorithm.HS256)  // 사용할 암호화 알고리즘과
+                    // signature 에 들어갈 secret값 세팅
+                    .compact();
+
+            return accessToken;
+        }
 }
 
