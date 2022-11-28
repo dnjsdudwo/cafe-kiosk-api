@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @RestController
@@ -21,7 +22,7 @@ public class SecurityAPIController {
     }
 
     @PostMapping("/regenerate/token")
-    public String regenerateToken(@RequestBody Token token){
-        return securityServiceImpl.validateRefreshToken(token.getAccessToken(),token.getRefreshToken());
+    public String regenerateToken(HttpServletRequest request){
+        return securityServiceImpl.validateRefreshToken(request);
     }
 }

@@ -13,10 +13,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @AllArgsConstructor
@@ -38,12 +42,21 @@ public class SecurityServiceImpl {
         }
     }
 
-    public String validateRefreshToken(String accessToken,String refreshToken){
+    public String validateRefreshToken(HttpServletRequest request){
+        String accessToken = getTokenFromCookies(request).get("accessToken");
+        String refreshToken = getTokenFromCookies(request).get("refreshToken");
         String createdAccessToken = jwtTokenProvider.validateRefreshToken(accessToken,refreshToken);
         return createdAccessToken;
     }
 
-    public String getRefreshToken(){
-        return refreshTokenRepository.findRefreshToken();
+    private Map<String,String> getTokenFromCookies(HttpServletRequest request){
+        Map<String,String> token = new HashMap<>();
+        Cookie[] cookies = request.getCookies();
+        if(cookies != null){
+            for (Cookie cookie: cookies) {
+                token.put(cookie.getName(),cookie.getValue().substring(("Bearer").length()));
+            }
+        }
+        return token;
     }
 }
