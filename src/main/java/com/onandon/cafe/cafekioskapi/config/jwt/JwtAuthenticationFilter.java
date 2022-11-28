@@ -37,6 +37,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         log.info(request.getRequestURI());
 
         Map<String,String> token = getTokenFromCookies(request);
+        System.out.println("token = " + token.get("refreshToken"));
         if(request.getRequestURI().contains("login") || request.getRequestURI().contains("/regenerate/token") || request.getRequestURI().contains("/image")){
             filterChain.doFilter(request,response);
             return;
