@@ -14,4 +14,5 @@ public class Token {
     private String accessToken;
     private String refreshToken;
     private Long accessTokenExpiresIn;
+    private Long refreshTokenExpiresIn;
 }

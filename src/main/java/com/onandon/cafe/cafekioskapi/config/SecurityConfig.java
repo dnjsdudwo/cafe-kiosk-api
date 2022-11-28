@@ -39,6 +39,8 @@ public class SecurityConfig {
                         UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
                 .antMatchers("/login/**").permitAll()
+                .antMatchers("/regenerate/token/**").permitAll()
+                .antMatchers("/image/**").permitAll()
                 .antMatchers("/**")
                 .authenticated()
 

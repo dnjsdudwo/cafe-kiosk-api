@@ -10,6 +10,7 @@ import com.onandon.cafe.cafekioskapi.repository.RefreshTokenRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletResponse;
@@ -26,7 +27,7 @@ public class SecurityServiceImpl {
 
     public ResponseEntity singUp(String id, String pwd, HttpServletResponse response){
         if(id.equals("user") && pwd.equals("1234")) {
-            Authentication authentication = new Userauthentication(id,pwd);
+            Userauthentication authentication = new Userauthentication(id,null,null);
             Token token = jwtTokenProvider.generateToken(authentication);
             response.setHeader("AccessToken",token.getAccessToken());
             response.setHeader("RefreshToken",token.getRefreshToken());
@@ -37,8 +38,8 @@ public class SecurityServiceImpl {
         }
     }
 
-    public String validateRefreshToken(String refreshToken){
-        String createdAccessToken = jwtTokenProvider.validateRefreshToken(refreshToken);
+    public String validateRefreshToken(String accessToken,String refreshToken){
+        String createdAccessToken = jwtTokenProvider.validateRefreshToken(accessToken,refreshToken);
         return createdAccessToken;
     }
 

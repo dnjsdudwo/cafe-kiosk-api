@@ -1,5 +1,6 @@
 package com.onandon.cafe.cafekioskapi.error;
 
+import io.jsonwebtoken.ExpiredJwtException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
