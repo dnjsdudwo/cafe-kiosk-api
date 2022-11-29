@@ -2,6 +2,7 @@ package com.onandon.cafe.cafekioskapi.controller;
 
 import com.onandon.cafe.cafekioskapi.dto.coffee.Coffee;
 import com.onandon.cafe.cafekioskapi.dto.drink.Drink;
+import com.onandon.cafe.cafekioskapi.mapper.TestMapper;
 import com.onandon.cafe.cafekioskapi.service.coffee.CoffeeService;
 import com.onandon.cafe.cafekioskapi.service.coffee.DrinkService;
 import lombok.AllArgsConstructor;
@@ -19,6 +20,15 @@ public class BeverageController {
     private final CoffeeService coffeeService;
     @Autowired
     private final DrinkService drinkService;
+
+    @Autowired
+    private TestMapper testMapper;
+
+    @PostMapping("/getMenuList")
+    public List<Coffee> getMenuList(@RequestParam String type) {
+        return testMapper.getMenuList(type);
+    }
+
 
     @PostMapping("/allPrice")
     public int allPirce(@RequestBody int param){

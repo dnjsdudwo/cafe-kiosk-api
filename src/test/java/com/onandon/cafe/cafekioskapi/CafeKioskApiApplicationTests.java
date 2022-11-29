@@ -6,6 +6,11 @@ import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.util.ArrayList;
+import java.util.List;
+
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class CafeKioskApiApplicationTests {
@@ -16,75 +21,45 @@ class CafeKioskApiApplicationTests {
     @Test
     @Order(1)
     @DisplayName("Normal Coffee Ice Test")
-    void normalCoffeeIceTest() {
+    void normalCoffeeIceTest() throws Exception {
         Coffee coffee = new Coffee();
 
-        coffee.setIce(true);
-        coffee.setBeans("test");
-        coffee.setName("name");
-        coffee.setPrice(1234);
+        coffee.setName("카페모카");
+        coffee.setPrice(2500);
+        coffee.setMenuInfo("카페모카 정보");
+        coffee.setSize("M");
+        coffee.setCount(1);
+        coffee.setType("coffee");
+//        coffee.setIsIce(String.valueOf(true));
+        coffee.setIsIce(String.valueOf(false));
 
 
-        try {
-            beverageController.makeCoffee(coffee);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        List<Coffee> list = new ArrayList<Coffee>();
+        list.add(coffee);
+
+        beverageController.allPirce(10000);
+        beverageController.coffeeOrderList(list);
     }
+
+
+    private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
+    private static final String URL = "jdbc:log4jdbc:mysql://localhost:3306/cafekiosk?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul";
+    private static final String USER = "sjs";
+    private static final String PASSWORD = "onandon12#";
+
     @Test
     @Order(2)
-    @DisplayName("Normal Coffee Hot Test")
-    void normalCoffeeHotTest() {
-        Coffee coffee = new Coffee();
+    @DisplayName("DB Test")
+    public void dataBaseTest() throws Exception {
+        Class.forName(DRIVER);
 
-        coffee.setIce(false);
-        coffee.setBeans("test");
-        coffee.setName("name");
-        coffee.setPrice(1234);
-
-
-        try {
-            beverageController.makeCoffee(coffee);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        try{
+            Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+            System.out.println("DB접속 정보 : " + connection);
+        }catch (Exception e){
+            e.printStackTrace();
         }
+
     }
 
-    @Test
-    @Order(3)
-    @DisplayName("Espresso Coffee Ice Test")
-    void espressoCoffeeIceTest() {
-        Coffee coffee = new Coffee();
-
-        coffee.setIce(true);
-        coffee.setBeans("test");
-        coffee.setName("name");
-        coffee.setPrice(1234);
-
-
-        try {
-            beverageController.makeEspresso(coffee);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Test
-    @Order(4)
-    @DisplayName("Espresso Coffee Hot Test")
-    void espressoCoffeeHotTest() {
-        Coffee coffee = new Coffee();
-
-        coffee.setIce(false);
-        coffee.setBeans("test");
-        coffee.setName("name");
-        coffee.setPrice(1234);
-
-
-        try {
-            beverageController.makeEspresso(coffee);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
 }
