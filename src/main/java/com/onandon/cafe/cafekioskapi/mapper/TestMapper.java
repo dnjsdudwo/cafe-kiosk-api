@@ -7,7 +7,8 @@ import java.util.List;
 
 @Mapper
 public interface TestMapper {
-    public String test() throws Exception;
-
     public List<Coffee> getMenuList(String type);
+
+    public void addMenuList(Coffee coffee);
+    public void delMenuList(int menu_no);
 }

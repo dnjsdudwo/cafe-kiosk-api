@@ -29,6 +29,16 @@ public class BeverageController {
         return testMapper.getMenuList(type);
     }
 
+    @PostMapping("/addMenuList")
+    public void addMenuList(@RequestBody Coffee param){
+        testMapper.addMenuList(param);
+    }
+
+    @PostMapping("/delMenuList")
+    public void delMenuList(@RequestBody Coffee param){
+        testMapper.delMenuList(param.getMenu_no());
+    }
+
 
     @PostMapping("/allPrice")
     public int allPirce(@RequestBody int param){

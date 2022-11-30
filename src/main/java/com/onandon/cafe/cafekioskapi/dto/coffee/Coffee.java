@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Coffee {
+    private int menu_no;
     private String name;
     private int price;
     private String menuInfo;

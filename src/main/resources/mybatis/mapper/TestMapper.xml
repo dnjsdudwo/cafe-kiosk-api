@@ -9,5 +9,15 @@
            AND type = #{type}
     </select>
 
+    <insert id="addMenuList" parameterType="com.onandon.cafe.cafekioskapi.dto.coffee.Coffee">
+        INSERT INTO menuList (name, price, menuInfo, type )
+        values ( #{name}, #{price}, #{menuInfo}, #{type} )
+    </insert>
+
+    <delete id="delMenuList" parameterType="int">
+        DELETE
+          FROM menuList
+         WHERE menu_no = #{menu_no}
+    </delete>
 
 </mapper>
