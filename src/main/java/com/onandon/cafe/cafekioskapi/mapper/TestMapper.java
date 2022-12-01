@@ -11,4 +11,5 @@ public interface TestMapper {
 
     public void addMenuList(Coffee coffee);
     public void delMenuList(int menu_no);
+    public void updMenuList(Coffee coffee);
 }

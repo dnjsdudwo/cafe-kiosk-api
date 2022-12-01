@@ -11,7 +11,7 @@
 
     <insert id="addMenuList" parameterType="com.onandon.cafe.cafekioskapi.dto.coffee.Coffee">
         INSERT INTO menuList (name, price, menuInfo, type )
-        values ( #{name}, #{price}, #{menuInfo}, #{type} )
+             VALUES ( #{name}, #{price}, #{menuInfo}, #{type} )
     </insert>
 
     <delete id="delMenuList" parameterType="int">
@@ -19,5 +19,15 @@
           FROM menuList
          WHERE menu_no = #{menu_no}
     </delete>
+
+    <update id="updMenuList" parameterType="com.onandon.cafe.cafekioskapi.dto.coffee.Coffee">
+        UPDATE menuList
+           SET name = #{name},
+               price = #{price},
+               menuInfo = #{menuInfo},
+               type = #{type}
+         WHERE 1=1
+           AND menu_no = #{menu_no};
+    </update>
 
 </mapper>

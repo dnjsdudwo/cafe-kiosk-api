@@ -20,7 +20,6 @@ public class BeverageController {
     private final CoffeeService coffeeService;
     @Autowired
     private final DrinkService drinkService;
-
     @Autowired
     private TestMapper testMapper;
 
@@ -30,13 +29,18 @@ public class BeverageController {
     }
 
     @PostMapping("/addMenuList")
-    public void addMenuList(@RequestBody Coffee param){
+    public void addMenuList(@RequestBody Coffee param) {
         testMapper.addMenuList(param);
     }
 
     @PostMapping("/delMenuList")
-    public void delMenuList(@RequestBody Coffee param){
+    public void delMenuList(@RequestBody Coffee param) {
         testMapper.delMenuList(param.getMenu_no());
+    }
+
+    @PostMapping("/updMenuList")
+    public void updMenuList(@RequestBody Coffee coffee) {
+        testMapper.updMenuList(coffee);
     }
 
 
