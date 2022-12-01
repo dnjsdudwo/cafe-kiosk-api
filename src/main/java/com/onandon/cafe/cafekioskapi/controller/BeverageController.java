@@ -1,14 +1,14 @@
 package com.onandon.cafe.cafekioskapi.controller;
 
-import com.onandon.cafe.cafekioskapi.dto.coffee.Coffee;
+import com.onandon.cafe.cafekioskapi.dto.menu.Menu;
 import com.onandon.cafe.cafekioskapi.service.coffee.CoffeeService;
 import com.onandon.cafe.cafekioskapi.service.drink.DrinkService;
-import com.onandon.cafe.cafekioskapi.service.drink.JuiceServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -37,9 +37,9 @@ public class BeverageController {
         return drinkService.makeDrink(param);
     }
 
-    @PostMapping("/juice")
-    public int makeJuice(@RequestBody Map<String,Object> param) throws Exception{
-        System.out.println("통신성공" + param);
-        return juiceService.makeDrink(param);
+    @PostMapping("/searchDrinkList")
+    public List<Menu> searchDrinkList() throws Exception{
+        System.out.println("통신성공");
+        return drinkService.searchDrinkList();
     }
 }

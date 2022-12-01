@@ -1,16 +1,23 @@
 package com.onandon.cafe.cafekioskapi.service.drink;
 
 import com.onandon.cafe.cafekioskapi.dto.drink.Smoothie;
+import com.onandon.cafe.cafekioskapi.dto.menu.Menu;
+import com.onandon.cafe.cafekioskapi.mapper.DrinkMapper;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 @Log4j2
 @Service
 @Primary
 public class DrinkServiceImpl implements DrinkService{
+
+    @Autowired
+    private DrinkMapper drinkMapper;
 
     @Override
     public int makeDrink(Map<String, Object> param) throws Exception {
@@ -46,5 +53,9 @@ public class DrinkServiceImpl implements DrinkService{
         log.info("ICE 선택하였습니다...");
     }
 
+    @Override
+    public List<Menu> searchDrinkList() throws Exception {
+        return drinkMapper.selectDrinkList();
+    }
 
 }
