@@ -1,6 +1,8 @@
 spring:
+  #database 접속 정보 및 설정
   datasource:
-    url: jdbc:mysql://localhost:3306/cafe?serverTimezone=UTC&characterEncoding=UTF-8
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: wjdalsdl11!
+    hikari:
+      jdbc-url: jdbc:mysql://localhost:3306/cafe?serverTimezone=UTC&characterEncoding=UTF-8
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: root
+      password: wjdalsdl11!
