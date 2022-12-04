@@ -54,8 +54,23 @@ public class DrinkServiceImpl implements DrinkService{
     }
 
     @Override
-    public List<Menu> searchDrinkList() throws Exception {
-        return drinkMapper.selectDrinkList();
+    public List<Menu> searchDrinkList(Map<String,Object> param) throws Exception {
+        return drinkMapper.selectDrinkList(param);
+    }
+    @Override
+    public int insertOrder(Map<String,Object> param) throws Exception {
+        int result = drinkMapper.insertOrder(param);
+
+        List<Map<String,Object>> orderList = (List<Map<String, Object>>) param.get("orderList");
+
+        if(result > 0){
+            for (Map<String, Object> orderInfo : orderList) {
+                orderInfo.put("orderNo",param.get("orderNo"));
+                result = drinkMapper.insertOrderDetail(orderInfo);
+            }
+        };
+
+        return result;
     }
 
 }

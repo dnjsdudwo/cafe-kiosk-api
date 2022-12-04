@@ -14,6 +14,8 @@ public interface DrinkService {
 
     public void isIce(boolean isIce) throws Exception;
 
-    public List<Menu> searchDrinkList() throws Exception;
+    public List<Menu> searchDrinkList(Map<String,Object> param) throws Exception;
+
+    public int insertOrder(Map<String,Object> param) throws Exception;
 
 }

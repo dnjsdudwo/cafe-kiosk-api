@@ -38,8 +38,16 @@ public class BeverageController {
     }
 
     @PostMapping("/searchDrinkList")
-    public List<Menu> searchDrinkList() throws Exception{
-        System.out.println("통신성공");
-        return drinkService.searchDrinkList();
+    public List<Menu> searchDrinkList(@RequestBody Map<String,Object> param) throws Exception{
+        System.out.println("통신성공" + param);
+        return drinkService.searchDrinkList(param);
     }
+
+    @PostMapping("/insertOrder")
+    public int insertOrder(@RequestBody Map<String,Object> param) throws Exception{
+        System.out.println("통신성공!" + param);
+        return drinkService.insertOrder(param);
+    }
+
+
 }

@@ -9,9 +9,11 @@ import java.util.Map;
 @Mapper
 public interface DrinkMapper {
 
-  public List<Menu> selectDrinkList();
+  public List<Menu> selectDrinkList(Map<String,Object> param);
 
+  public int insertOrder(Map<String,Object> param);
 
+  public int insertOrderDetail(Map<String,Object> param);
 
 
 

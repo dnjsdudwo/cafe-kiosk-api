@@ -2,10 +2,43 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.onandon.cafe.cafekioskapi.mapper.DrinkMapper">
 
-    <select id="selectDrinkList" resultType="com.onandon.cafe.cafekioskapi.dto.menu.Menu">
+    <select id="selectDrinkList" resultType="com.onandon.cafe.cafekioskapi.dto.menu.Menu" parameterType="map">
         /* selectDrinkList 메뉴 목록*/
         SELECT *
-          FROM MENU
+          FROM MENU JOIN CATEGORY USING(CATEGORY_NO)
+         WHERE CATEGORY_NM=#{categoryNm};
     </select>
+
+    <insert id="insertOrder" parameterType="map">
+        INSERT
+          INTO ORDERS
+          ( ORDER_DATE
+          , STTUS
+          , TAKEOUT_AT
+          ) VALUES
+          ( CURRENT_DATE
+          , 'ready'
+          , #{takeoutAt}
+          )
+    <selectKey keyProperty="orderNo" resultType="int" order="AFTER">
+        SELECT LAST_INSERT_ID()
+    </selectKey>
+    </insert>
+
+    <insert id="insertOrderDetail" parameterType="map">
+        INSERT
+          INTO ORDER_DETAIL
+        VALUES
+            (
+              #{orderNo}
+            , #{menuNo}
+            , #{orderPrice}
+            , #{cnt}
+            , #{size}
+            , #{shotAt}
+            , ${isIceAt}
+            , #{bean}
+            )
+    </insert>
 
 </mapper>
