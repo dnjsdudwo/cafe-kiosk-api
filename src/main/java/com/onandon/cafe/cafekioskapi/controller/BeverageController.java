@@ -54,7 +54,6 @@ public class BeverageController {
     public String coffeeOrderList(@RequestBody List<Coffee> param) throws Exception {
         System.out.println("coffee 통신: " + param);
 
-
         Coffee coffee = new Coffee();
 
         int index = 1;
@@ -98,7 +97,6 @@ public class BeverageController {
             log.info(index + "번 음료==================================");
             log.info("menu = {}", drink.getName() + " " + drink.getSize());
             drinkService.makeDrink(drink);
-
 
             index++;
         }
