@@ -30,4 +30,16 @@
            AND menu_no = #{menu_no};
     </update>
 
+    <insert id="addOrderList" parameterType="com.onandon.cafe.cafekioskapi.dto.coffee.Coffee">
+        INSERT INTO orderList ( name, price, isIce, size, count, resdate )
+        VALUES ( #{name}, #{price}, #{isIce}, #{size}, #{count} , date_format(now(), '%Y%m%d'))
+    </insert>
+
+    <select id="getOrderList" resultType="com.onandon.cafe.cafekioskapi.dto.coffee.Order">
+        SELECT *
+          FROM orderList
+         WHERE 1=1
+      ORDER BY resdate desc;
+    </select>
+
 </mapper>

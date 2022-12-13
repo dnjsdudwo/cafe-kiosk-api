@@ -26,12 +26,12 @@ public class CoffeeUtill {
 
             if(coffee.getType() == 'c'){
                 log.info(index + "번 커피==================================");
-                log.info("menu = {}", coffee.getName() + " " + coffee.getSize());
+                log.info("menu = {}", coffee.getName() + " " + coffee.getSize() + " " + coffee.getCount() + "개");
                 coffeeService.make(coffee);
             }else
             if(coffee.getType() == 'd') {
                 log.info(index + "번 음료==================================");
-                log.info("menu = {}", coffee.getName() + " " + coffee.getSize());
+                log.info("menu = {}", coffee.getName() + " " + coffee.getSize() + " " + coffee.getCount() + "개");
                 drinkService.makeDrink(coffee);
             }
             index++;

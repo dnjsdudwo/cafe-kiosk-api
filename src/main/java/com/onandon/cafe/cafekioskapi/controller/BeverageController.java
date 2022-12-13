@@ -2,6 +2,7 @@ package com.onandon.cafe.cafekioskapi.controller;
 
 import com.onandon.cafe.cafekioskapi.dto.coffee.Coffee;
 import com.onandon.cafe.cafekioskapi.dto.coffee.CoffeeUtill;
+import com.onandon.cafe.cafekioskapi.dto.coffee.Order;
 import com.onandon.cafe.cafekioskapi.mapper.TestMapper;
 import com.onandon.cafe.cafekioskapi.service.coffee.CoffeeService;
 import com.onandon.cafe.cafekioskapi.service.coffee.DrinkService;
@@ -43,6 +44,11 @@ public class BeverageController {
         testMapper.updMenuList(coffee);
     }
 
+    @PostMapping("/getOrderList")
+    public List<Order> getOrderList() {
+        return testMapper.getOrderList();
+    }
+
 
     @PostMapping("/allPrice")
     public int allPirce(@RequestBody int param){
@@ -55,6 +61,15 @@ public class BeverageController {
         System.out.println("coffee 통신: " + param);
 
         CoffeeUtill.cafeUtill(param, coffeeService, drinkService);
+
+        for(Coffee coffee : param) {
+            if(coffee.getIsIce().equals( "false")) {
+                coffee.setIsIce("HOT");
+            }else {
+                coffee.setIsIce("ICE");
+            }
+            testMapper.addOrderList(coffee);
+        }
 
         return "coffee success";
     }
