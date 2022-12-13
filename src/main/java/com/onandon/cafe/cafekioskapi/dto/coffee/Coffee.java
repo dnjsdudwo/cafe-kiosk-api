@@ -15,7 +15,7 @@ public class Coffee {
     private int count;
     private String isIce;
     private String size;
-    private String type;
+    private char type;
 
 //    private String beans;
 }
