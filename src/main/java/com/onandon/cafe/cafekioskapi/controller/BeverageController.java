@@ -25,8 +25,8 @@ public class BeverageController {
     private TestMapper testMapper;
 
     @PostMapping("/getMenuList")
-    public List<Coffee> getMenuList(@RequestParam String type) {
-        return testMapper.getMenuList(type);
+    public List<Coffee> getMenuList(@RequestParam String typeCode) {
+        return testMapper.getMenuList(typeCode);
     }
 
     @PostMapping("/addMenuList")

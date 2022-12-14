@@ -22,14 +22,14 @@ public class CoffeeUtill {
             coffee.setCount(value.getCount());
             coffee.setIsIce(value.getIsIce());
             coffee.setSize(value.getSize());
-            coffee.setType(value.getType());
+            coffee.setTypeCode(value.getTypeCode());
 
-            if(coffee.getType() == 'c'){
+            if(coffee.getTypeCode() == "coffee"){
                 log.info(index + "번 커피==================================");
                 log.info("menu = {}", coffee.getName() + " " + coffee.getSize() + " " + coffee.getCount() + "개");
                 coffeeService.make(coffee);
             }else
-            if(coffee.getType() == 'd') {
+            if(coffee.getTypeCode() == "drink") {
                 log.info(index + "번 음료==================================");
                 log.info("menu = {}", coffee.getName() + " " + coffee.getSize() + " " + coffee.getCount() + "개");
                 drinkService.makeDrink(coffee);

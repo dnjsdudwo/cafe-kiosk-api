@@ -6,12 +6,12 @@
         SELECT *
           FROM menuList
          WHERE 1=1
-           AND type = #{type}
+           AND typeCode = #{typeCode}
     </select>
 
     <insert id="addMenuList" parameterType="com.onandon.cafe.cafekioskapi.dto.coffee.Coffee">
-        INSERT INTO menuList (name, price, menuInfo, type )
-             VALUES ( #{name}, #{price}, #{menuInfo}, #{type} )
+        INSERT INTO menuList (name, price, menuInfo, typeCode )
+             VALUES ( #{name}, #{price}, #{menuInfo}, #{typeCode} )
     </insert>
 
     <delete id="delMenuList" parameterType="int">
@@ -25,7 +25,7 @@
            SET name = #{name},
                price = #{price},
                menuInfo = #{menuInfo},
-               type = #{type}
+               typeCode = #{typeCode}
          WHERE 1=1
            AND menu_no = #{menu_no};
     </update>
@@ -36,10 +36,10 @@
     </insert>
 
     <select id="getOrderList" resultType="com.onandon.cafe.cafekioskapi.dto.coffee.Order">
-        SELECT *
-          FROM orderList
-         WHERE 1=1
-      ORDER BY resdate desc;
+        SELECT name, (price*count) as price, isIce, size, count, resdate
+        FROM orderList
+        WHERE 1=1
+        ORDER BY resdate desc;
     </select>
 
 </mapper>
