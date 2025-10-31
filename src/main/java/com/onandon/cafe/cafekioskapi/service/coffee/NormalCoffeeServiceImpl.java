@@ -19,7 +19,7 @@ public class NormalCoffeeServiceImpl implements CoffeeService{
     public void grindBean(String beanName) {
         log.info(beanName + "원두 가는 중.........");
         try {
-            Thread.sleep(1000);
+            Thread.sleep(10000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
