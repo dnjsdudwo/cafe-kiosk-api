@@ -17,6 +17,7 @@ public class NormalCoffeeServiceImpl implements CoffeeService{
 
     @Override
     public void grindBean(String beanName) {
+        수정
         log.info(beanName + "원두 가는 중.........");
         try {
             Thread.sleep(10000);
